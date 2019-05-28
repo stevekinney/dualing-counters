@@ -1,7 +1,7 @@
-import React, { Component, createContext } from "react";
-import ReactDOM from "react-dom";
+import React, { Component, createContext } from 'react';
+import ReactDOM from 'react-dom';
 
-import "./styles.scss";
+import './styles.scss';
 
 const CounterContext = createContext();
 
@@ -25,7 +25,7 @@ class CounterProvider extends Component {
 }
 
 const Counter = ({ count, increment, name }) => {
-  console.log("Rendering", name);
+  console.log('Rendering', name);
   return (
     <button onClick={increment}>
       Increment {name} ({count})
@@ -46,7 +46,7 @@ function Application() {
   );
 }
 
-const rootElement = document.getElementById("root");
+const rootElement = document.getElementById('root');
 ReactDOM.render(
   <CounterProvider>
     <Application />
