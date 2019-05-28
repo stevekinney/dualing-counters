@@ -1,4 +1,4 @@
-import React, { useState, createContext } from 'react';
+import React, { useState, createContext, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 
 import './styles.scss';
@@ -9,8 +9,8 @@ const CounterProvider = ({ children }) => {
   const [countA, setCountA] = useState(0);
   const [countB, setCountB] = useState(0);
 
-  const incrementA = () => setCountA(countA + 1);
-  const incrementB = () => setCountB(countB + 1);
+  const incrementA = useCallback(() => setCountA(countA + 1), [countA]);
+  const incrementB = useCallback(() => setCountB(countB + 1), [countB]);
 
   const value = {
     countA,
