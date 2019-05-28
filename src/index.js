@@ -1,37 +1,37 @@
-import React, { Component, createContext } from 'react';
+import React, { useState, createContext } from 'react';
 import ReactDOM from 'react-dom';
 
 import './styles.scss';
 
 const CounterContext = createContext();
 
-class CounterProvider extends Component {
-  state = { countA: 0, countB: 0 };
+const CounterProvider = ({ children }) => {
+  const [countA, setCountA] = useState(0);
+  const [countB, setCountB] = useState(0);
 
-  incrementA = () => this.setState(({ countA }) => ({ countA: countA + 1 }));
-  incrementB = () => this.setState(({ countB }) => ({ countB: countB + 1 }));
+  const incrementA = () => setCountA(countA + 1);
+  const incrementB = () => setCountB(countB + 1);
 
-  render() {
-    const { incrementA, incrementB } = this;
-    const { countA, countB } = this.state;
-    const value = { countA, countB, incrementA, incrementB };
+  const value = {
+    countA,
+    countB,
+    incrementA,
+    incrementB
+  };
 
-    return (
-      <CounterContext.Provider value={value}>
-        {this.props.children}
-      </CounterContext.Provider>
-    );
-  }
-}
+  return (
+    <CounterContext.Provider value={value}>{children}</CounterContext.Provider>
+  );
+};
 
-const Counter = ({ count, increment, name }) => {
+const Counter = React.memo(({ count, increment, name }) => {
   console.log('Rendering', name);
   return (
     <button onClick={increment}>
       Increment {name} ({count})
     </button>
   );
-};
+});
 
 function Application() {
   return (
